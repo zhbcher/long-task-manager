@@ -12,6 +12,17 @@
 - **已知架构决策**: e.g. 使用 JWT 认证，Redis 做缓存
 - **外部依赖**: e.g. MySQL 8, Redis 7, Google Cloud SDK
 
+## 环境前提
+
+> 子代理执行前应校验的环境条件，避免因环境不一致导致无效执行。
+
+- **操作系统**: e.g. macOS 14 / Ubuntu 22.04
+- **运行时版本**: e.g. Node 20+, Python 3.11+
+- **磁盘空间**: e.g. 至少 5GB 可用
+- **网络要求**: e.g. 需要访问 npm registry / GitHub
+- **权限要求**: e.g. 需要 sudo 权限 / Docker 访问
+- **已安装工具**: e.g. git, ffmpeg, docker
+
 ## 任务摘要
 
 - **任务名称**: [一句话描述]
