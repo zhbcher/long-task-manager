@@ -192,6 +192,26 @@ Evidence: `curl -s http://localhost:3000/api/health`
 
 **铁律**：WBS 台账必须与 Heartbeat Log 一致。
 
+## Verification 与 Loop 的职责边界
+
+| 模块 | 职责 | 不做什么 |
+|------|------|---------|
+| **Verification Gate** | 执行验证命令，输出 PASS / FAIL + 原因 + evidence | 不决定是否重试，不修改状态 |
+| **Task Executor** | 读取 Verification 结果，决策下一步 | 不重新验证 |
+| **Ralph Loop** | 消费 FAIL 结果，执行重试策略 | 不修改验证标准 |
+
+**决策流程**:
+```
+Verification 输出 → FAIL + reason
+    ↓
+Task Executor 判断:
+    ├─ 还有 retry budget? (attempt < 3)
+    │   └─ 是 → 触发 Ralph Loop（切换策略）
+    └─ 否 → 标记 blocked，上报用户
+```
+
+**铁律**: Verification 不控制流程，只输出事实。
+
 ---
 
 ## 完工自检清单

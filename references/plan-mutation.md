@@ -39,6 +39,18 @@
 - [ ] 新任务 Dependencies 已更新（3.2 depends on 3.1）
 - [ ] 下游任务的 Dependencies 已更新（从 3 → 3.2）
 
+**实例**: 
+```
+原始: T3 "安装依赖" → T4 "构建" → T5 "部署"
+     (T4 depends on 3, T5 depends on 4)
+
+split T3 → T3.1 "安装 npm 包" + T3.2 "配置环境变量"
+
+结果: T4 Dependencies 从 "3" 改为 "3.2"
+     T5 不变（仍依赖 4）
+     T3 标记 skipped
+```
+
 ---
 
 ### 2. Insert — 插入
